@@ -4,6 +4,8 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+
 def takeScreenshot(directory):
     myScreenshot = pyautogui.screenshot()
     myScreenshot.save(directory)
@@ -40,8 +42,8 @@ def findAndClick(directory):
     for pt in zip(*loc[::-1]):  
         cv2.rectangle(chromeIcon, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
         pyautogui.click(pt)
-        return
-    return
+        return True
+    return False
     # cv2.imwrite('result.png', chromeIcon)
 
 def findAndMouseMove(directory):
@@ -77,17 +79,34 @@ def findAndClick2(directory):
 
 def performLoveAction():
     listCurPos = [pyautogui.position().x, pyautogui.position().y]
-    listCurPos[0] += 45
+    listCurPos[0] += 42.5
+    listCurPos[1] -= 40
+    pyautogui.click(listCurPos)
+    return
+
+def performHahaAction():
+    listCurPos = [pyautogui.position().x, pyautogui.position().y]
+    listCurPos[0] += 42.5 + 125
     listCurPos[1] -= 40
     pyautogui.click(listCurPos)
     return
 
 def performCloseCurTab():
+    time.sleep(1)
     pyautogui.hotkey('ctrl', 'w')
     return
 
+def isNotFound():
+    if (isFound('./404.PNG')):
+        pyautogui.hotkey('ctrl', 'w')
+        return True
+    else:
+        return False
 
 
+
+
+    
 findAndClick('./chromeIcon.PNG')
 time.sleep(1)
 
@@ -103,8 +122,17 @@ time.sleep(1)
 # time.sleep(1)
 # findAndClick('./camXucCheo.PNG')
 
-while True:
-    findAndClick('./reactionsTds/love.PNG')
+
+noMoreLove = False
+noMoreHaha = False
+while (not noMoreHaha):
+
+    noMoreHaha = not findAndClick('./reactionsTds/haha.PNG')
+    if (noMoreHaha):
+        break
+    time.sleep(1)
+    if (isNotFound()):
+        continue
     timeOfSroll = 0
     time.sleep(3)
     while (isFound('./fbBut/like.PNG') == False and timeOfSroll <= 20):
@@ -114,31 +142,92 @@ while True:
     findAndMouseMove('./fbBut/like.PNG')
     time.sleep(1)
 
-    # if (timeOfSroll > 10):
-    #     timeOfSroll = 0
-    #     while (isFound('./fbBut/likePic.PNG') == False and timeOfSroll <= 40):
-    #         pyautogui.scroll(-150);
-    #         time.sleep(.1)
-    #         timeOfSroll += 1
-    #     findAndMouseMove('./fbBut/likePic.PNG')
-    #     time.sleep(1)
+    if (timeOfSroll > 20):
+        timeOfSroll = 0
+        while (isFound('./fbBut/likePic.PNG') == False and timeOfSroll <= 10):
+            pyautogui.scroll(-150);
+            time.sleep(.1)
+            timeOfSroll += 1
+        findAndMouseMove('./fbBut/likePic.PNG')
+        time.sleep(1)
 
     if (timeOfSroll > 10):
         pyautogui.press('home')
         timeOfSroll = 0
-        while (isFound('./fbBut/likeVideo.PNG') == False and timeOfSroll <= 20):
+        while (isFound('./fbBut/likeVid.PNG') == False and timeOfSroll <= 10):
             pyautogui.scroll(-150);
             time.sleep(.1)
             timeOfSroll += 1
-        findAndMouseMove('./fbBut/likeVideo.PNG')
+        findAndMouseMove('./fbBut/likeVid.PNG')
+        time.sleep(1)
+
+    if (timeOfSroll > 10):
+        pyautogui.press('home')
+        timeOfSroll = 0
+        while (isFound('./fbBut/likeVidWatch.PNG') == False and timeOfSroll <= 10):
+            pyautogui.scroll(-150);
+            time.sleep(.1)
+            timeOfSroll += 1
+        findAndMouseMove('./fbBut/likeVidWatch.PNG')
+        time.sleep(1)
+
+    performHahaAction()
+    performCloseCurTab()
+    time.sleep(1)
+    findAndClick('./reactionsTds/nhanTien.PNG')
+    time.sleep(2)
+
+while (not noMoreLove):
+
+    noMoreLove = not findAndClick('./reactionsTds/love.PNG')
+    if (noMoreLove):
+        break
+    if (isNotFound()):
+        continue
+    timeOfSroll = 0
+    time.sleep(3)
+    while (isFound('./fbBut/like.PNG') == False and timeOfSroll <= 20):
+        pyautogui.scroll(-100);
+        time.sleep(.5)
+        timeOfSroll += 1
+    findAndMouseMove('./fbBut/like.PNG')
+    time.sleep(1)
+
+    if (timeOfSroll > 20):
+        timeOfSroll = 0
+        while (isFound('./fbBut/likePic.PNG') == False and timeOfSroll <= 20):
+            pyautogui.scroll(-150);
+            time.sleep(.1)
+            timeOfSroll += 1
+        findAndMouseMove('./fbBut/likePic.PNG')
+        time.sleep(1)
+
+    if (timeOfSroll > 20):
+        pyautogui.press('home')
+        timeOfSroll = 0
+        while (isFound('./fbBut/likeVid.PNG') == False and timeOfSroll <= 10):
+            pyautogui.scroll(-150);
+            time.sleep(.1)
+            timeOfSroll += 1
+        findAndMouseMove('./fbBut/likeVid.PNG')
+        time.sleep(1)
+
+    if (timeOfSroll > 10):
+        pyautogui.press('home')
+        timeOfSroll = 0
+        while (isFound('./fbBut/likeVidWatch.PNG') == False and timeOfSroll <= 10):
+            pyautogui.scroll(-150);
+            time.sleep(.1)
+            timeOfSroll += 1
+        findAndMouseMove('./fbBut/likeVidWatch.PNG')
         time.sleep(1)
 
     performLoveAction()
     performCloseCurTab()
     time.sleep(1)
     findAndClick('./reactionsTds/nhanTien.PNG')
-    print('Da nhan tien thanh cong.')
     time.sleep(2)
+    
 
 # tds 80%
 # fb 90%
