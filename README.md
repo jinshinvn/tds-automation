@@ -1,5 +1,7 @@
 # tdsAutomation
 
+Tool to gain Traodoisub coins through cross-interaction on Facebook. This is an alternative way to using PHP or Python Tools by Traodoisub Admin.
+
 ## Warning
 
 Don't run this repo on your pc anyway. The configuration is only suitable for my system. I will not be responsible for any problems caused with your system and files.
@@ -14,3 +16,6 @@ Don't run this repo on your pc anyway. The configuration is only suitable for my
 - Using Ublock Origin for better experience
 - Screen resolution is 1920 x 1080
 
+## P/s
+
+I'm temporarily running out of ideas...
