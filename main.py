@@ -125,6 +125,7 @@ time.sleep(1)
 
 noMoreLove = False
 noMoreHaha = False
+
 while (not noMoreHaha):
 
     noMoreHaha = not findAndClick('./reactionsTds/haha.PNG')
